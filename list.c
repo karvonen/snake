@@ -2,11 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-struct node {
-    int x;
-    int y;
-    struct node* next;
-};
+
 
 struct node* create(int x, int y) {
     struct node* new = (struct node*) malloc(sizeof(struct node));
