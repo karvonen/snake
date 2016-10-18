@@ -33,10 +33,24 @@ void add_last(struct node* head, int x, int y) {
 
 struct node* find_match(struct node* head, int x, int y) {
     while (head != NULL) {
-        if (head->x == x && head->y == y) return head;
+        if (head->x == x && head->y == y) {
+            return head;
+        }
         head = head->next;
     }
     return NULL;
+}
+
+//Doesn't check if last node is also the first but that shouldn't happen in this game.
+void remove_last(struct node* head) {
+    struct node* temp = head;
+    struct node* prev;
+    while (temp->next != NULL) {
+        prev = temp;
+        temp = temp-> next;
+    }
+    free(temp);
+    prev->next = NULL;
 }
 
 struct node* add_first(struct node* head, int x, int y) {
@@ -45,8 +59,24 @@ struct node* add_first(struct node* head, int x, int y) {
         printf("failed to create a new linked list node.\n");
         exit(1);
     }
+    new->next = head;
+    return new;
+}
 
-    head = new;
-    return head;
+void print_list(struct node* head) {
+    while (head != NULL) {
+        printf("x: %d, y: %d", head->x, head->y);
+        head = head->next;
+    }
+    printf("\n");
+}
 
+int list_size(struct node* head) {
+    int size = 0;
+    while (head != NULL) {
+        size++;
+        head = head->next;
+    }
+    printf("debug size: %d\n", size);
+    return size;
 }
