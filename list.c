@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
-
 struct node* create(int x, int y) {
     struct node* new = (struct node*) malloc(sizeof(struct node));
 
@@ -18,7 +16,6 @@ struct node* create(int x, int y) {
 }
 
 void add_last(struct node* head, int x, int y) {
-
     while (head->next != NULL) {
         head = head->next;
     }

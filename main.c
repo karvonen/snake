@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <zconf.h>
 #include <time.h>
 #include "list.h"
 
@@ -14,8 +13,6 @@ int BOARD_SIZE = 10;
 struct node* head;
 struct piece* apple;
 enum direction{up, right, down, left};
-
-
 
 void clear_screen()
 {
@@ -60,7 +57,7 @@ int is_move_possible(int x, int y) {
 
 
 
-void place_apple(char **board, struct piece *apple) {
+void create_apple(char board[][BOARD_SIZE], struct piece* apple) {
     while (1) {
         int x = rand() % BOARD_SIZE;
         int y = rand() % BOARD_SIZE;
@@ -73,12 +70,11 @@ void place_apple(char **board, struct piece *apple) {
 
 }
 
-
 //Fix this thing to work with real time input.
 enum direction get_direction() {
 
     char c;
-    scanf("%c\n",&c);
+    scanf("%c\n", &c);
     if (c == 'w') return up;
     if (c == 'a') return left;
     if (c == 's') return down;
@@ -95,7 +91,7 @@ void run() {
     head = create(BOARD_SIZE / 2, BOARD_SIZE / 2);
 
     apple = (struct piece*) malloc(sizeof(struct piece));
-    place_apple(board, apple);
+    create_apple(board, apple);
 
     enum direction direction;
     int grow = 2;       //times left to grow
@@ -122,7 +118,7 @@ void run() {
         }
 
         if (apple->x == x && apple->y == y) {
-            place_apple(board, apple);
+            create_apple(board, apple);
             grow++;
             apples_eaten++;
         }
@@ -134,9 +130,7 @@ void run() {
         }
 
         update(board);
-
     }
-
 }
 
 
